@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InventoryManagement</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'notification_list' %>
+    <%= javascript_pack_tag 'notification_counter' %>
+  </head>
+
+  <body >
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <%= link_to "Home", root_path, class: "navbar-brand text-white" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <%= active_link_to "Employee", employees_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Item", items_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Category", categories_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Brand", brands_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Issue", issues_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Storage", storages_path, class: "nav-item nav-link text-white" %>
+            <%= active_link_to "Admin", admins_path, class: "nav-item nav-link text-white" %>
+            <% if current_user && current_user.employee_access %>
+              <%= active_link_to "Notifications", notifications_path, class: "nav-item nav-link text-white" %>
+            <% end %>
+          </div>
+        </div>
+        <% if current_user %>
+          <div class="btn-group" data-behavior="notifications" data-no-turbolink>
+            <button class="btn btn-dark dropdown-toggle" data-behavior="notification-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-bell"></i><span data-behavior="unread-count" class="bg-danger p-1 m-1"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" data-behavior="notification-items">
+            </div>
+          </div>
+        <% end %>
+      </nav>
+    </header>
+    <div class="text-center py-3">
+      <% if current_user %>
+        <div class="lead">Signed in as: <%= current_user.name %> <%= image_tag(@auth['info']['image'], width: '50', height: '50') %> </div>
+        <%= link_to "Log Out", sign_out_path, method: :delete, class: "btn btn-outline-info mt-3" %>
+      <% else %>
+        <%= link_to "Log In", "http://localhost:3000/auth/google_oauth2", class: "btn btn-outline-info" %>
+      <% end %>
+    </div>
+    <div class="my-4">
+      <h4 class="text-center text-danger">
+        <ul>
+          <% if flash[:message] %>
+            <% flash[:message].each do |value| %>
+              <li class="my-2"><%= value %></li>
+            <% end %>
+          <% elsif flash.present? %>
+            <% flash.each do |type, value| %>
+              <li class="my-2"><%= value %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </h4>
+    </div>
+    
+    <%= yield %>
+    
+  </body>
+</html>

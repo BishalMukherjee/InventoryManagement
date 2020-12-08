@@ -1,0 +1,37 @@
+<main class="container">
+  <table class="table table-borderless mt-4">
+    <tr>
+      <td class="w-25">Item's ID</td>
+      <td class="w-75"><%= @item.id %></td>
+    </tr>
+    <tr>
+      <td>Item's Name</td>
+      <td><%= @item.name %></td>
+    </tr>
+    <tr>
+      <td>Item's Status</td>
+      <% if @item.status %>
+        <td><%= "Working" %></td>
+      <% else %>
+        <td><%= "Not working" %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Associated Employee</td>
+      <td><% if @item.employee %><%= @item.employee.name %><% end %></td>
+    </tr>
+    <tr>
+      <td>Brand Name</td>
+      <td><%= @item.brand.name %></td>
+    </tr>
+    <tr>
+      <td>Item's Notes</td>
+      <td><%= @item.notes %></td>
+    </tr>
+  </table>
+  <div class="my-5">
+    <% unless @item.document.blank? %>
+      <%= link_to "Download the document", {action: 'document'}, class: "btn btn-primary"  %>
+    <% end %>
+  </div>
+</main>

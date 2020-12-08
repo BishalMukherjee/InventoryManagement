@@ -1,0 +1,37 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h3>Employees</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email ID</th>
+      <th>Status</th>
+    <tr>
+    <% @employees.each do |e| %>
+      <tr>
+        <td><%= e.id %></td>
+        <td><%= e.name %></td>
+        <td><%= e.email %></td>
+        <td>
+          <% if e.status %>
+            <%= "Active" %>
+          <% else %>
+            <%= "Inactive" %>
+          <% end %>
+        </td>
+        <% if current_user && current_user.employee_access %>
+          <td><%= link_to "Show", employee_path(e) %></td>
+          <td><%= link_to "Edit", edit_employee_path(e) %></td>
+          <td><%= link_to "Delete", employee_path(e), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.employee_access %>
+      <%= link_to "Add Employee", new_employee_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

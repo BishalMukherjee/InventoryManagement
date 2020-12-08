@@ -1,0 +1,30 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h2>Storage Details</h2>
+  </div>
+  <table class="table">
+    <tr>
+      <th>category Name</th>
+      <th>Total</th>
+      <th>Buffer</th>
+      <th>Procurement time(Y/M/D)</th>
+    <tr>
+    <% @storages.each do |s| %>
+      <tr>
+        <td><%= s.category.name %></td>
+        <td><%= s.total %></td>
+        <td><%= s.buffer %></td>
+        <td><%= s.procurement_time %></td>
+        <% if current_user && current_user.storage_access %>
+          <td><%= link_to "Edit", edit_storage_path(s) %></td>
+          <td><%= link_to "Delete", storage_path(s), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        <% end %>  
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.storage_access %>
+      <%= link_to "New Storage Details", new_storage_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

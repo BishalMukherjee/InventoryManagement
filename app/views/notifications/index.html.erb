@@ -1,0 +1,20 @@
+<main class="container">
+  <div class="mt-3 mb-5">
+    <% unless @notifications_all.blank? %>
+      <div class="text-center mb-3">
+        <%= link_to "Delete all", notifications_clear_table_path, data: {confirm: "Are you sure?"} %>
+      </div>
+      <div class="mb-4">
+        <% @notifications_all.each do |n| %>
+          <div class="my-2">The <%= n.notifiable_name %> <%= n.details %> 
+            <% if current_user && current_user.employee_access %>
+              <%= link_to "Delete", notification_path(n), method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h4 class="text-danger">There's no new notification.</h4>
+    <% end %>
+  </div>
+</main>

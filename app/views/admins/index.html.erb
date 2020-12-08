@@ -1,0 +1,81 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h3>Admins</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email ID</th>
+      <th>Category</th>
+      <th>Brand</th>
+      <th>Item</th>
+      <th>Employee</th>
+      <th>Storage</th>
+      <th>Admin</th>
+    <tr>
+    <% @admins.each do |a| %>
+      <tr>
+        <td><%= a.id %></td>
+        <td><%= a.name %></td>
+        <td><%= a.email %></td>
+        <td>
+          <% if a.category_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <td>
+          <% if a.brand_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <td>
+          <% if a.item_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <td>
+          <% if a.employee_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <td>
+          <% if a.storage_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <td>
+          <% if a.admin_access %>
+            <%= "Yes" %>
+          <% else %>
+            <%= "No" %>
+          <% end %>
+        </td>
+        <% if current_user && current_user.admin_access %>
+          <td><%= link_to "Show", admin_path(a) %></td>
+          <td><%= link_to "Edit", edit_admin_path(a) %></td>
+          <td>
+            <% unless a == current_user %>
+              <%= link_to "Delete", admin_path(a), method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.admin_access %>
+      <%= link_to "Add User", new_admin_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

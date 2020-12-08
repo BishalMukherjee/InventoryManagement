@@ -1,0 +1,31 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h3>Issues</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Item Name</th>
+      <th>Status</th>
+      <th>Details</th>
+    <tr>
+    <% @issues.each do |i| %>
+      <tr>
+        <td><%= i.id %></td>
+        <td><%= i.item.name %></td>
+        <td>
+          <% if i.status %>
+            <span class="text-success"><%= "Solved" %></span>
+          <% else %>
+            <span class="text-danger"><%= "Unsolved" %></span>
+          <% end %>
+        </td>
+        <td><%= i.details %></td>
+        <td><%= link_to "Edit", edit_issue_path(i) %></td>
+      </tr>
+    <%end%>
+  </table>
+  <div class="text-center">
+    <%= link_to "New Issue", new_issue_path, class:"btn btn-primary my-5" %>
+  </div>
+</main>

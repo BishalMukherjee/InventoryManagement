@@ -1,0 +1,25 @@
+<main class="container-fluid">
+<div class="text-center">
+    <h3>Categories</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Category Name</th>
+    </tr>
+    <% @categories.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.name %></td>
+        <% if current_user && current_user.category_access %>
+          <td><%= link_to "Delete", category_path(c), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.category_access %>
+      <%= link_to "New Category", new_category_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

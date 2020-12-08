@@ -1,0 +1,31 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h3>Items</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Employee</th>
+      <th>Brand</th>
+    <tr>
+    <% @items.each do |i| %>
+      <tr>
+        <td><%= i.name %></td>
+        <td><%= i.id %></td>
+        <td><% if i.employee %><%= i.employee.name %> / <%= i.employee.email %><% end %></td>
+        <td><%= i.brand.name %></td>
+        <td><%= link_to "Show", item_path(i) %></td>
+        <%if current_user && current_user.item_access %>
+          <td><%= link_to "Edit", edit_item_path(i) %></td>
+          <td><%= link_to "Delete", item_path(i), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.item_access %>
+      <%= link_to "Add Item", new_item_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

@@ -1,0 +1,28 @@
+<main class="container">
+  <h3 class="text-center">Add New Storage Details</h3>
+  <%= form_for @storage do |s| %>
+    <div class="form-group row mx-auto my-4">
+      <%= s.label :category_name, class:"col-sm-auto" %>
+      <div class="col-sm-10">
+        <%= s.select :category_id, options_from_collection_for_select(@categories, "id", "name", "1"), {}, {class:"w-50"} %>
+      </div>
+    </div>
+    <div class="form-group row mx-auto my-4">
+      <div class="col-sm-6">
+        <%= s.label :total %>
+        <span class="ml-5"><%= s.number_field :total, min: 1, required: true %></span>
+      </div>
+      <div class="col-sm-6">
+        <%= s.label :buffer %>
+        <span class="ml-5"><%= s.number_field :buffer, min: 0, required: true %></span>
+      </div>
+    </div>
+    <div class="form-group row mx-auto my-4">
+      <%= s.label :procurement_time, class:"ml-3" %>
+      <span class="ml-4"><%= s.date_field :procurement_time, min: "2005-04-20", max: Date.today%></span>
+    </div>
+    <div class="text-center my-4">
+      <%= s.submit "Submit", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+</main>

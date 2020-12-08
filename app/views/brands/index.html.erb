@@ -1,0 +1,27 @@
+<main class="container-fluid">
+  <div class="text-center">
+    <h3>Brands</h3>
+  </div>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Brand Name</th>
+      <th>Category</th>
+    </tr>
+    <% @brands.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= b.name %></td>
+        <td><%= b.category.name%></td>
+        <% if current_user && current_user.brand_access %>
+          <td><%= link_to "Delete", brand_path(b), method: :delete, data: {confirm: "Are you sure?"} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <% if current_user && current_user.brand_access %>
+      <%= link_to "New Brand", new_brand_path, class:"btn btn-primary my-5" %>
+    <% end %>
+  </div>
+</main>

@@ -1,0 +1,23 @@
+<%= form_for @employee do |e| %>
+  <div class="form-group row mx-auto my-4">
+    <%= e.label :name, class:"col-sm-1 col-form-label" %>
+    <div class="col-sm-10">
+      <%= e.text_field :name, required: true, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group row mx-auto my-4">
+    <%= e.label :email, class:"col-1 col-form-label" %>
+    <div class="col-sm-10">
+      <%= e.text_field :email, required: true, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group mx-auto row">
+    <div class="col-6">
+      <%= e.label :status, required: true %>
+      <span class="ml-5"><%= e.select :status, [['Active', true], ['Inactive', false]] %></span>
+    </div>
+  </div>
+  <div class="text-center my-4">
+    <%= e.submit "Submit", class:"btn btn-primary" %>
+  </div>
+<%end%>

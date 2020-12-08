@@ -1,0 +1,41 @@
+<%= form_for @admin do |a| %>
+  <div class="form-group row mx-auto my-4">
+    <%= a.label :name, class:"col-sm-1 col-form-label" %>
+    <div class="col-sm-10">
+      <%= a.text_field :name, required: true, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group row mx-auto my-4">
+    <%= a.label :email, class:"col-1 col-form-label" %>
+    <div class="col-sm-10">
+      <%= a.text_field :email, required: true, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group mx-auto row my-4">
+    <div class="col-4">
+      <%= a.label :category_access, required: true %>
+      <span class="ml-5"><%= a.select :category_access, [['Yes', true], ['No', false]] %></span>
+    </div>
+    <div class="col-4">
+      <%= a.label :brand_access, required: true %>
+      <span class="ml-5"><%= a.select :brand_access, [['Yes', true], ['No', false]] %></span>
+    </div>
+    <div class="col-4">
+      <%= a.label :storage_access, required: true %>
+      <span class="ml-5"><%= a.select :storage_access, [['Yes', true], ['No', false]] %></span>
+    </div>
+  </div>
+  <div class="form-group mx-auto row my-4">
+    <div class="col-6">
+      <%= a.label :item_access, required: true %>
+      <span class="ml-5"><%= a.select :item_access, [['Yes', true], ['No', false]] %></span>
+    </div>
+    <div class="col-6">
+      <%= a.label :employee_access, required: true %>
+      <span class="ml-5"><%= a.select :employee_access, [['Yes', true], ['No', false]] %></span>
+    </div>
+  </div>
+  <div class="text-center my-4">
+    <%= a.submit "Submit", class:"btn btn-primary" %>
+  </div>
+<%end%>
